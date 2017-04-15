@@ -1,0 +1,3 @@
+<template name="foot">
+    <view class="page-foot">所有数据均记录在本地，请放心使用^_^</view>
+</template>

@@ -1,0 +1,29 @@
+
+<!--handbook.wxml-->
+<import src="../../common/foot.wxml" />
+<view class="container">
+  <view class="page-head">
+    <view class="page-head-desc">本次活动共计花费{{ sum }}元，个人花费{{persum}}元。
+    </view>
+    <view class="page-head-line"></view>
+  </view>
+  <view class="page-body">
+    <view class="index-bd">
+        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{sublist}}" wx:key="id">
+          <view class="content">
+            <navigator url="../detail/detail?mainindex={{mainindex}}&subindex={{ index }}&act=edit" class="navigator">
+              <view class="navigator-text">{{index+1}}、{{item.subtitle}}:共花费 {{item.cost}}元</view>
+              <view class="navigator-arrow"></view>
+            </navigator>
+          </view>
+          <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+        </view>
+    </view>
+    <view>
+      <navigator url="../detail/detail?mainindex={{mainindex}}&act=new" hover-class="navigator-hover">
+        <image class="float-action" src="../../common/icon/plus_alt_32x32.png"></image>
+      </navigator>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

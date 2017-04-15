@@ -1,0 +1,74 @@
+
+<import src="../../common/foot.wxml" />
+
+<view class="container">
+  <view class="page-body">
+    <form catchsubmit="formSubmit" catchreset="formReset">
+      <view class="page-section">
+        <view class="weui-cells__title">标题</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+
+              <input name="title" class="weui-input" focus placeholder="" value='{{subtitle}}' />
+
+          </view>
+        </view>
+        <view class="weui-cells__title">随便说点什么吧</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <textarea name="detail" auto-height value='{{comment}}'/>
+          </view>
+        </view>
+        <view class="weui-cells__title">花费费用（元）</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input name="cost" class="weui-input" type="digit" placeholder="" value='{{cost}}' />
+          </view>
+        </view>
+        <view class="weui-cells__title">日期选择器</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+
+              <view class="weui-label">当前选择</view>
+
+            <view class="weui-cell__bd">
+              <picker name="date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+                <view class="weui-input">{{date}}</view>
+              </picker>
+              <picker name="time" mode="time" value="{{time}}" start="00:01" end="23:59" bindchange="bindTimeChange">
+                <view class="weui-input">{{time}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__title">参与人数</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+
+              <view class="weui-label">当前选择</view>
+
+            <view class="weui-cell__bd">
+              <picker name="member" value="{{arrindex}}" range="{{array}}" bindchange="bindNumberChange">
+                <view class="weui-input" name="member">{{array[arrindex]}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__title">位置</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+
+              <view class="weui-input" bindtap="chooseLocation" wx:if="{{hasLocation === false}}">未选择位置</view>
+              <view class="weui-input" name="locationadd" bindtap="chooseLocation" wx:if="{{hasLocation === true}}">{{location.name || location.address}}</view>
+
+          </view>
+        </view>
+        <view class="btn-area">
+          <button class="weui-btn" type="primary" formType="submit">提交</button>
+          <button class="weui-btn" formType="reset">重置</button>
+        </view>
+      </view>
+    </form>
+  </view>
+      <template is="foot" />
+</view>

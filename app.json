@@ -1,0 +1,20 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/handbook/index/index",
+    "pages/handbook/detail/detail"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "随手记账本",
+    "navigationBarTextStyle":"black"
+  },
+  
+  "networkTimeout": {
+    "requst": 20000,
+    "cnnectSocket": 20000,
+    "upladFile": 20000,
+    "downloadFile": 20000
+  }
+}

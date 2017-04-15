@@ -1,0 +1,36 @@
+/**index.wxss**/
+/**@import "../common/index.wxss";**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.icon-img {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.wxapp-modal{
+ width: 100%;
+ height: 100%;
+ position: fixed;
+ top: 0px;
+ left: 0px;
+ z-index:999;
+}
