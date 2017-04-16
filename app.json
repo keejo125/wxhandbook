@@ -1,8 +1,11 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/settings/settings",
     "pages/handbook/index/index",
-    "pages/handbook/detail/detail"
+    "pages/handbook/detail/detail",
+    "pages/handbook/statistics/statistics",
+    "pages/handbook/sublist/sublist"
   ],
   "window":{
     "backgroundTextStyle":"light",

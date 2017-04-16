@@ -4,19 +4,25 @@ var list = wx.getStorageSync('cashflow') || []
 Page({
   data: {
     mainindex: '',
+    typeindex: '',
     title: '',
+    subtitle: '',
     sum: 0,
     persum: 0,
-    sublist: []
+    typelist: []
   },
   onLoad: function (params) {
     // 生命周期函数--监听页面加载
+    var typelist = wx.getStorageSync('typelist') || []
+
     this.setData({
-      mainindex: params.index,
-      title: list[params.index].title,
+      mainindex: params.mainindex,
+      typeindex: params.typeindex,
+      title: list[params.mainindex].title,
+      subtitle: typelist[params.typeindex].name,
     })
     wx.setNavigationBarTitle({
-      title: this.data.title
+      title: this.data.title + ' - ' + this.data.subtitle
     })
   },
   onReady: function () {
@@ -26,16 +32,21 @@ Page({
     // 生命周期函数--监听页面显示
     list = wx.getStorageSync('cashflow') || []
     var sublist = list[this.data.mainindex].items
+    var typelist = []
     var sum = 0
     var persum = 0
     for (var i = 0; i < sublist.length; i++) {
-      sum += parseFloat(sublist[i].cost)
-      persum += parseFloat(sublist[i].cost) / sublist[i].member
+      if (sublist[i].typeindex == this.data.typeindex) {
+        sum += parseFloat(sublist[i].cost)
+        persum += parseFloat(sublist[i].cost) / sublist[i].member
+        sublist[i].id = i
+        typelist.push(sublist[i])
+      }
     }
     this.setData({
       sum: sum.toFixed(2),
       persum: persum.toFixed(2),
-      sublist: sublist
+      typelist: typelist
     })
   },
   onHide: function () {

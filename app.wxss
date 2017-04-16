@@ -116,7 +116,7 @@ textarea {
   text-align: center;
   color: #1aad19;
   font-size: 2;
-  position: fixed;
+  position: relative;
   width: 100%;
   bottom: 0
 }
@@ -213,6 +213,11 @@ textarea {
   right: 28rpx;
 }
 
+/* canvas */
+.canvas {
+    width: 100%;
+    height: 200px;
+}
 
 
 /* float */
@@ -224,10 +229,20 @@ textarea {
   height: 50px;
   border-radius: 50%;
   box-shadow: 2px 2px 10px #AAA;
-  /* background: #1891D4; */
   z-index: 100;
   opacity:0.6;
+}
 
+.float-action2 {
+  position: fixed;
+  bottom: 30%;
+  right: 23%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px #AAA;
+  z-index: 100;
+  opacity:0.6;
 }
 
 /* touch */

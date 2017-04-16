@@ -1,0 +1,37 @@
+<!--settings.wxml-->
+<import src="../common/foot.wxml" />
+<view class="container">
+
+<view class="page-head">
+    <view class="page-head-desc">设置账目分类
+    </view>
+    <view class="page-head-line"></view>
+  </view>
+
+  <view>
+    <modal title="新增类型" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel">
+      <input name='title' bindblur="setTitle" placeholder="新增一个类型" value="{{temptitle}}">
+      </input>
+    </modal>
+  </view>
+  
+    <view class="page-body">
+    <view class="index-bd">
+      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{list}}" wx:key="id">
+        <view class="content">
+            <view class="navigator-text">{{item.name}}</view>
+            <view class="navigator-arrow"></view>
+        </view>
+        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+      </view>
+    </view>
+    <view bindtap="showModal">
+      <image class="float-action2" src="../common/icon/add.png"></image>
+    </view>
+    <view bindtap="clearAll">
+        <image class="float-action" src="../common/icon/delete.png"></image>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

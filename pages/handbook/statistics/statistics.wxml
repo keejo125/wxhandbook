@@ -1,0 +1,24 @@
+<import src="../../common/foot.wxml" />
+<view class="container">
+  <view class="page-head">
+    <view class="page-head-desc">本次活动共计花费{{ sum }}元，个人花费{{persum}}元。
+    </view>
+    <view class="page-head-line"></view>
+  </view>
+  <view class="page-body">
+  <view class="page-section page-section-title">
+      消费统计图：
+    </view>
+    <view class="page-section page-section-gap">
+      <canvas canvas-id="pieCanvas" class="canvas" style="height:300px" bindtouchstart="touchHandler"></canvas>
+    </view>
+    <view class="page-section page-section-title">
+      消费轨迹图：
+    </view>
+    <view class="page-section page-section-gap">
+      <map id="map" style="width: 100%; height: 300px;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" polyline="{{polyline}}" include-points="{{points}}" show-location>
+      </map>
+    </view>
+  </view>
+  <template is="foot" />
+</view>

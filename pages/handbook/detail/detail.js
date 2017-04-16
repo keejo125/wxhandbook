@@ -4,11 +4,14 @@ var curDate = util.curDate
 var app = getApp()
 var list = []
 
+
 Page({
   data: {
     act: 'new',
-    array: ['1', '2', '3', '4', '5'],
-    arrindex: 0,
+    numberarray: app.globalData.numberarray,
+    numberindex: 0,
+    typearray: app.globalData.typearray,
+    typeindex: 0,
     mainindex: 0,
     subindex: 0,
     subtitle: '',
@@ -24,11 +27,21 @@ Page({
   onLoad: function (params) {
     // 生命周期函数--监听页面加载
     list = wx.getStorageSync('cashflow') || []
+    var typelist = wx.getStorageSync('typelist') || []
+    var typearray = []
+    if (typelist.length == 0) {
+      typearray = app.globalData.typearray
+    } else {
+      for (var i = 0; i < typelist.length; i++) {
+        typearray.push(typelist[i].name)
+      }
+    }
     if (params.act === 'new') {
       var curdate = curDate(new Date())
       this.setData({
         act: 'new',
         mainindex: params.mainindex,
+        typearray: typearray,
         date: curdate[0],
         time: curdate[1]
       })
@@ -38,7 +51,9 @@ Page({
         act: 'edit',
         mainindex: params.mainindex,
         subindex: params.subindex,
-        arrindex: billinfo.member - 1,
+        numberindex: billinfo.member - 1,
+        typeindex: billinfo.typeindex || 0,
+        typearray: typearray,
         subtitle: billinfo.subtitle,
         comment: billinfo.comment,
         cost: billinfo.cost,
@@ -69,14 +84,14 @@ Page({
   onReachBottom: function () {
     // 页面上拉触底事件的处理函数
   },
-  onShareAppMessage: function () {
-    // 用户点击右上角分享
-    return {
-      title: 'title', // 分享标题
-      desc: 'desc', // 分享描述
-      path: 'path' // 分享路径
-    }
-  },
+  // onShareAppMessage: function () {
+  //   // 用户点击右上角分享
+  //   return {
+  //     title: 'title', // 分享标题
+  //     desc: 'desc', // 分享描述
+  //     path: 'path' // 分享路径
+  //   }
+  // },
 
   chooseLocation: function () {
     var that = this
@@ -94,7 +109,13 @@ Page({
   bindNumberChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      arrindex: e.detail.value
+      numberindex: e.detail.value
+    })
+  },
+  bindTypeArrayChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      typeindex: e.detail.value
     })
   },
   bindDateChange: function (e) {
@@ -109,37 +130,44 @@ Page({
   },
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    if (this.data.act === 'new'){
+    if (this.data.act === 'new') {
       list[this.data.mainindex].items.push(
         {
           subtitle: e.detail.value.title,
           comment: e.detail.value.detail,
-          cost: parseFloat(e.detail.value.cost|| '0') ,
+          cost: parseFloat(e.detail.value.cost || '0'),
           date: e.detail.value.date,
           time: e.detail.value.time,
           member: parseInt(e.detail.value.member) + 1,
+          typeindex: parseInt(e.detail.value.typeindex),
           hasLocation: this.data.hasLocation,
           location: this.data.location
         }
       )
-    }else{
-      list[this.data.mainindex].items[this.data.subindex]={
-          subtitle: e.detail.value.title,
-          comment: e.detail.value.detail,
-          cost: parseFloat(e.detail.value.cost),
-          date: e.detail.value.date,
-          time: e.detail.value.time,
-          member: parseInt(e.detail.value.member) + 1,
-          hasLocation: this.data.hasLocation,
-          location: this.data.location
-        }
+    } else {
+      list[this.data.mainindex].items[this.data.subindex] = {
+        subtitle: e.detail.value.title,
+        comment: e.detail.value.detail,
+        cost: parseFloat(e.detail.value.cost),
+        date: e.detail.value.date,
+        time: e.detail.value.time,
+        member: parseInt(e.detail.value.member) + 1,
+        typeindex: parseInt(e.detail.value.typeindex),
+        hasLocation: this.data.hasLocation,
+        location: this.data.location
+      }
     }
-    list[this.data.mainindex].items.sort(function(a,b){
-      var d1=new Date(a.date.replace(/-/g,'/')+' '+a.time)
-      var d2=new Date(b.date.replace(/-/g,'/')+' '+b.time)
-      return d1-d2
+    list[this.data.mainindex].items.sort(function (a, b) {
+      var d1 = new Date(a.date.replace(/-/g, '/') + ' ' + a.time)
+      var d2 = new Date(b.date.replace(/-/g, '/') + ' ' + b.time)
+      return d1 - d2
     })
     wx.setStorageSync('cashflow', list)
+    wx.showToast({
+      title: '成功',
+      icon: 'success',
+      duration: 2000
+    })
     wx.navigateBack({
       delta: 1, // 回退前 delta(默认为1) 页面
       success: function (res) {
@@ -171,7 +199,7 @@ Page({
       var billinfo = this.data.inidata
       this.setData({
         act: 'edit',
-        arrindex: billinfo.member - 1,
+        numberindex: billinfo.member - 1,
         subtitle: billinfo.subtitle,
         comment: billinfo.comment,
         cost: billinfo.cost,
