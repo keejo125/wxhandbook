@@ -4,6 +4,7 @@ var list = wx.getStorageSync('cashflow') || []
 Page({
   data: {
     mainindex: '',
+    typearray: app.globalData.typearray,
     title: '',
     sum: 0,
     persum: 0,
