@@ -4,12 +4,13 @@ var list = wx.getStorageSync('cashflow') || []
 Page({
   data: {
     mainindex: '',
+    typearray: app.globalData.typearray,
     typeindex: '',
     title: '',
     subtitle: '',
     sum: 0,
     persum: 0,
-    typelist: []
+    sublist: []
   },
   onLoad: function (params) {
     // 生命周期函数--监听页面加载
@@ -31,22 +32,22 @@ Page({
   onShow: function () {
     // 生命周期函数--监听页面显示
     list = wx.getStorageSync('cashflow') || []
-    var sublist = list[this.data.mainindex].items
-    var typelist = []
+    var templist = list[this.data.mainindex].items
+    var sublist = []
     var sum = 0
     var persum = 0
-    for (var i = 0; i < sublist.length; i++) {
-      if (sublist[i].typeindex == this.data.typeindex) {
-        sum += parseFloat(sublist[i].cost)
-        persum += parseFloat(sublist[i].cost) / sublist[i].member
-        sublist[i].id = i
-        typelist.push(sublist[i])
+    for (var i = 0; i < templist.length; i++) {
+      if (templist[i].typeindex == this.data.typeindex) {
+        sum += parseFloat(templist[i].cost)
+        persum += parseFloat(templist[i].cost) / templist[i].member
+        templist[i].id = i
+        sublist.push(templist[i])
       }
     }
     this.setData({
       sum: sum.toFixed(2),
       persum: persum.toFixed(2),
-      typelist: typelist
+      sublist: sublist
     })
   },
   onHide: function () {
@@ -121,16 +122,17 @@ Page({
   },
   //删除事件
   del: function (e) {
+    list[this.data.mainindex].items.splice(this.data.sublist[e.currentTarget.dataset.index].id,1)
     this.data.sublist.splice(e.currentTarget.dataset.index, 1)
     this.setData({
       sublist: this.data.sublist
     })
-    list[this.data.mainindex].items = this.data.sublist
     wx.setStorageSync('cashflow', list)
     wx.showToast({
       title: '成功',
       icon: 'success',
       duration: 2000
     })
+    this.onShow()
   }
 })

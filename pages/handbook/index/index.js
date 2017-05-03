@@ -122,5 +122,6 @@ Page({
       icon: 'success',
       duration: 2000
     })
+    this.onShow()
   }
 })

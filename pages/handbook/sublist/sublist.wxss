@@ -1,0 +1,136 @@
+/* touch */
+.touch-main {
+ font-size: 14px;
+ display: flex;
+ justify-content: space-between;
+ border-bottom:0px;
+ width: 100%;
+ overflow: hidden
+}
+.touch-content {
+ width: 100%;
+ padding: 0px;
+ line-height: 22px;
+ margin-right:0;
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ -webkit-transform: translateX(90px);
+ transform: translateX(90px);
+ margin-left: -90px
+}
+.touch-hide {
+ background-color: orangered;
+ width: 90px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ color: #fff;
+ -webkit-transform: translateX(90px);
+ transform: translateX(90px);
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ margin: 0 0 15px 0;
+ border-radius: 5px;
+}
+
+.touch-active .touch-content,
+.touch-active .touch-hide {
+ -webkit-transform: translateX(0);
+ transform: translateX(0);
+}
+
+.navigator-text1 {
+  display: inline;
+  text-align: left;
+  font-size: 28rpx;
+}
+
+.navigator-time {
+  text-align: right;
+  float: right;
+  font-size: 28rpx;
+}
+
+.navigator-text2 {
+  text-align: center;
+  padding: 20rpx 40rpx 20rpx 40rpx;
+}
+
+.navigator-text3 {
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.timeline {
+  padding: 0;
+  list-style: none;
+  position: relative;
+  z-index: 100;
+}
+
+/* The line */
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: #afdcf8;
+  left: 10%;
+  margin-left: -10px;
+  z-index: 100;
+}
+
+.cbp_tmtimeline_li {
+  position: relative;
+}
+
+/* Right content */
+
+.timeline_tmlabel {
+  margin: 0 0 15px 15%;
+  background: #b6e4f4;
+  padding: 2em;
+  font-size: 1.2em;
+  font-weight: 300;
+  position: relative;
+  border-radius: 5px;
+}
+
+/* The triangle */
+
+.timeline_tmlabel:after {
+  right: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-right-color: #b6e4f4;
+  border-width: 10px;
+  top: 5px;
+}
+
+/* The icons */
+
+.timeline_tmicon {
+  width: 15px;
+  height: 15px;
+  text-transform: none;
+  font-size: 1em;
+  line-height: 15px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  color: #fff;
+  background: #46a4da;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px #afdcf8;
+  text-align: center;
+  left: 10%;
+  top: 5px;
+  margin: 0 0 0 -12.5px;
+  z-index: 100;
+}

@@ -9,14 +9,19 @@
   </view>
   <view class="page-body">
     <view class="index-bd">
-      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{typelist}}" wx:key="id">
-        <view class="content">
-          <navigator url="../detail/detail?mainindex={{mainindex}}&subindex={{ item.id }}&act=edit" class="navigator">
-            <view class="navigator-text">{{index+1}}、{{item.subtitle}}:共花费 {{item.cost}}元</view>
-            <view class="navigator-arrow"></view>
-          </navigator>
+      <view class="timeline" wx:for="{{sublist}}" wx:key="id">
+        <view class="timeline_tmicon">{{index+1}}</view>
+        <view class=" touch-main {{item.isTouchMove ? 'touch-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+          <view class="touch-content">
+            <navigator url="../detail/detail?mainindex={{mainindex}}&subindex={{ item.id }}&act=edit" class="timeline_tmlabel">
+              <view class="navigator-text1">{{typearray[item.typeindex]}}</view>
+              <view class="navigator-time">{{item.date}}</view>
+              <view class="navigator-text2">{{item.subtitle}}：共花费 {{item.cost}}元</view>
+              <view class="navigator-text3">{{item.location.name}}</view>
+            </navigator>
+          </view>
+          <view class="touch-hide" catchtap="del" data-index="{{index}}">删除</view>
         </view>
-        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
       </view>
     </view>
   </view>
