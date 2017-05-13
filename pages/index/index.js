@@ -1,13 +1,26 @@
 //index.js
 //获取应用实例
 var app = getApp()
-var list = wx.getStorageSync('cashflow') || []
+var rawlist = wx.getStorageSync('cashflow') || []
 Page({
   data: {
-    modalHidden: true,
+    modalHidden1: true,
+    modalHidden2: true,
     temptitle: '',
-    list: list,
+    tempindex: '',
+    list: rawlist,
     userInfo: {}
+  },
+onLoad: function () {
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
   },
   onShareAppMessage: function () {
     // 用户点击右上角分享
@@ -17,11 +30,6 @@ Page({
       path: '/pages/index/index' // 分享路径
     }
   },
-  showModal: function (e) {
-    this.setData({
-      modalHidden: !this.data.modalHidden
-    })
-  },
   setTitle: function (e) {
     this.setData({
       temptitle: e.detail.value
@@ -30,34 +38,61 @@ Page({
       value: ''
     }
   },
-  modalBindaconfirm: function (e) {
+  //新增模态框
+  showModal1: function (e) {
+    this.setData({
+      modalHidden1: !this.data.modalHidden1
+    })
+  },
+  modalBindaconfirm1: function (e) {
     var templist = this.data.list
     templist.push({
       title: this.data.temptitle,
+      id:templist.length,
+      items: []
+    })
+    rawlist.push({
+      title: this.data.temptitle,
+      id:templist.length,
       items: []
     })
     this.setData({
-      modalHidden: !this.data.modalHidden,
+      modalHidden1: !this.data.modalHidden1,
       temptitle: '',
       list: templist
     })
-    wx.setStorageSync('cashflow', templist)
+    wx.setStorageSync('cashflow', rawlist)
   },
-  modalBindcancel: function () {
+  modalBindcancel1: function () {
     this.setData({
-      modalHidden: !this.data.modalHidden,
+      modalHidden1: !this.data.modalHidden1,
     })
   },
-
-  onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
+  //重命名模态框
+  showModal2: function (e) {
+    var tempindex = e.currentTarget.dataset.index
+    var temptitle = this.data.list[tempindex].title
+    this.setData({
+      modalHidden2: !this.data.modalHidden2,
+      temptitle:temptitle,
+      tempindex: tempindex
+    })
+  },
+  modalBindaconfirm2: function (e) {
+    var templist = this.data.list
+    var index = this.data.tempindex
+    templist[index].title = this.data.temptitle
+    rawlist[index].title = this.data.temptitle
+    this.setData({
+      modalHidden2: !this.data.modalHidden2,
+      temptitle: '',
+      list: templist
+    })
+    wx.setStorageSync('cashflow', rawlist)
+  },
+  modalBindcancel2: function () {
+    this.setData({
+      modalHidden2: !this.data.modalHidden2,
     })
   },
   //手指触摸动作开始 记录起点X坐标
@@ -112,12 +147,13 @@ Page({
   },
   //删除事件
   del: function (e) {
-    this.data.list.splice(e.currentTarget.dataset.index, 1)
+    var index = e.currentTarget.dataset.index
+    this.data.list.splice(index, 1)
     this.setData({
       list: this.data.list
     })
-    list = this.data.list
-    wx.setStorageSync('cashflow', list)
+    rawlist.splice(index, 1)
+    wx.setStorageSync('cashflow', rawlist)
     wx.showToast({
       title: '成功',
       icon: 'success',

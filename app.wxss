@@ -261,9 +261,25 @@ textarea {
  margin-right:0;
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
- -webkit-transform: translateX(90px);
- transform: translateX(90px);
- margin-left: -90px
+ -webkit-transform: translateX(170px);
+ transform: translateX(170px);
+ margin-left: -170px;
+ border-radius: 5px;
+}
+.rename {
+ background-color: lightgray;
+ width: 80px;
+ right: 90px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ color: #fff;
+ -webkit-transform: translateX(170px);
+ transform: translateX(170px);
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ border-radius: 5px;
 }
 .del {
  background-color: orangered;
@@ -277,10 +293,12 @@ textarea {
  transform: translateX(90px);
  -webkit-transition: all 0.4s;
  transition: all 0.4s;
+ border-radius: 5px;
 }
 
 .touch-move-active .content,
-.touch-move-active .del {
+.touch-move-active .del,
+.touch-move-active .rename {
  -webkit-transform: translateX(0);
  transform: translateX(0);
 }

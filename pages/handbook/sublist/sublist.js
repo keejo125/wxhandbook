@@ -1,5 +1,5 @@
 var app = getApp()
-var list = wx.getStorageSync('cashflow') || []
+var rawlist = wx.getStorageSync('cashflow') || []
 
 Page({
   data: {
@@ -19,7 +19,7 @@ Page({
     this.setData({
       mainindex: params.mainindex,
       typeindex: params.typeindex,
-      title: list[params.mainindex].title,
+      title: rawlist[params.mainindex].title,
       subtitle: typelist[params.typeindex].name,
     })
     wx.setNavigationBarTitle({
@@ -31,8 +31,8 @@ Page({
   },
   onShow: function () {
     // 生命周期函数--监听页面显示
-    list = wx.getStorageSync('cashflow') || []
-    var templist = list[this.data.mainindex].items
+    rawlist = wx.getStorageSync('cashflow') || []
+    var templist = rawlist[this.data.mainindex].items
     var sublist = []
     var sum = 0
     var persum = 0
@@ -122,12 +122,13 @@ Page({
   },
   //删除事件
   del: function (e) {
-    list[this.data.mainindex].items.splice(this.data.sublist[e.currentTarget.dataset.index].id,1)
-    this.data.sublist.splice(e.currentTarget.dataset.index, 1)
+    var index = e.currentTarget.dataset.index
+    rawlist[this.data.mainindex].items.splice(this.data.sublist[index].id,1)
+    this.data.sublist.splice(index, 1)
     this.setData({
       sublist: this.data.sublist
     })
-    wx.setStorageSync('cashflow', list)
+    wx.setStorageSync('cashflow', rawlist)
     wx.showToast({
       title: '成功',
       icon: 'success',

@@ -6,7 +6,11 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}的私人账本</text>
   </view>
   <view>
-    <modal title="新建一个账目" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel">
+    <modal title="新建一个账目" hidden="{{modalHidden1}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm1" bindcancel="modalBindcancel1">
+      <input name='title' bindblur="setTitle" placeholder="起一个响亮的名字吧" value="{{temptitle}}">
+      </input>
+    </modal>
+    <modal title="账目重命名" hidden="{{modalHidden2}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm2" bindcancel="modalBindcancel2">
       <input name='title' bindblur="setTitle" placeholder="起一个响亮的名字吧" value="{{temptitle}}">
       </input>
     </modal>
@@ -20,10 +24,11 @@
             <view class="navigator-arrow"></view>
           </navigator>
         </view>
+        <view class="rename" catchtap="showModal2" data-index="{{index}}">重命名</view>
         <view class="del" catchtap="del" data-index="{{index}}">删除</view>
       </view>
     </view>
-    <view bindtap="showModal">
+    <view bindtap="showModal1">
       <image class="float-action2" src="../common/icon/add.png"></image>
     </view>
     <view>
