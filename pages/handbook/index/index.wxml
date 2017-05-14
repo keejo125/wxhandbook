@@ -23,21 +23,6 @@
           <view class="touch-hide" catchtap="del" data-index="{{index}}">删除</view>
         </view>
       </view>
-
-      <!--<view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{sublist}}" wx:key="id">
-        <view class="content timeline">
-          <view class="timeline_tmicon">{{index+1}}</view>
-          <navigator url="../detail/detail?mainindex={{mainindex}}&subindex={{ index }}&act=edit" class="timeline_tmlabel">
-            <view class="navigator-text">
-              <view class="navigator-text1">{{typearray[item.typeindex]}}</view>
-              <view class="navigator-time">{{item.date}}</view>
-              <view class="navigator-text2">{{item.subtitle}}：共花费 {{item.cost}}元</view>
-              <view class="navigator-text3">{{item.location.name}}</view>
-            </view>
-          </navigator>
-        </view>
-        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
-      </view>-->
     </view>
     <view>
       <navigator url="../detail/detail?mainindex={{mainindex}}&act=new" hover-class="navigator-hover">

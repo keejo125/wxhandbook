@@ -1,12 +1,12 @@
 <import src="../../common/foot.wxml" />
 <view class="container">
   <view class="page-body">
-    <form catchsubmit="formSubmit" catchreset="formReset">
+    <form bindsubmit="formSubmit" bindreset="formReset">
       <view class="page-section">
         <view class="weui-cells__title">标题</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input name="title" class="weui-input" focus placeholder="" value='{{subtitle}}' />
+            <input name="title" class="weui-input" focus='{{isfocus}}' placeholder="" value='{{subtitle}}' />
           </view>
         </view>
 

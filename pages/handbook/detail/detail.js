@@ -8,6 +8,7 @@ var list = []
 Page({
   data: {
     act: 'new',
+    isfocus: true,
     numberarray: app.globalData.numberarray,
     numberindex: 0,
     typearray: app.globalData.typearray,
@@ -40,6 +41,7 @@ Page({
       var curdate = curDate(new Date())
       this.setData({
         act: 'new',
+        isfocus: true,
         mainindex: params.mainindex,
         typearray: typearray,
         date: curdate[0],
@@ -49,6 +51,7 @@ Page({
       var billinfo = list[params.mainindex].items[params.subindex]
       this.setData({
         act: 'edit',
+        isfocus: false,
         mainindex: params.mainindex,
         subindex: params.subindex,
         numberindex: billinfo.member - 1,
