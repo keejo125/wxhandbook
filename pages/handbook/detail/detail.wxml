@@ -31,7 +31,7 @@
         <view class="weui-cells__title">花费费用（元）</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input name="cost" class="weui-input" type="digit" placeholder="" value='{{cost}}' />
+            <input name="cost" class="weui-input" type="digit" placeholder="0" value='{{cost}}' />
           </view>
         </view>
         <view class="weui-cells__title">日期选择器</view>
@@ -39,7 +39,7 @@
           <view class="weui-cell weui-cell_input">
             <view class="weui-label">当前选择</view>
             <view class="weui-cell__bd">
-              <picker name="date" mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+              <picker name="date" mode="date" value="{{date}}"  bindchange="bindDateChange">
                 <view class="weui-input">{{date}}</view>
               </picker>
               <picker name="time" mode="time" value="{{time}}" start="00:01" end="23:59" bindchange="bindTimeChange">
